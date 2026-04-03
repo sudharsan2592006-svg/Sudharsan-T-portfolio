@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sudharsan | AI & Data Science Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; }
+
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(10px);
+      padding: 18px 40px; display: flex;
+      justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(99,102,241,0.2);
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; color: #6366f1; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .nav-links a:hover { color: #6366f1; }
+
+    #home {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 100px 20px 60px;
+      background: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0a0a 70%);
+    }
+    .badge {
+      background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.4);
+      color: #818cf8; padding: 6px 18px; border-radius: 50px;
+      font-size: 0.8rem; margin-bottom: 24px; display: inline-block;
+    }
+    .hero-name { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800; margin-bottom: 16px; }
+    .hero-name span { color: #6366f1; }
+    .hero-sub { font-size: 1rem; color: #94a3b8; max-width: 500px; line-height: 1.7; margin-bottom: 36px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .btn1 {
+      padding: 12px 28px; background: #6366f1; color: #fff;
+      border-radius: 8px; text-decoration: none; font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn1:hover { background: #4f46e5; transform: translateY(-2px); }
+    .btn2 {
+      padding: 12px 28px; border: 1px solid #6366f1; color: #6366f1;
+      border-radius: 8px; text-decoration: none; font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn2:hover { background: rgba(99,102,241,0.1); }
+
+    .tags { display: flex; gap: 12px; margin-top: 48px; flex-wrap: wrap; justify-content: center; }
+    .tag {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; color: #94a3b8;
+    }
+
+    section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+
+    .sec-label { color: #6366f1; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; }
+    .sec-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 16px; }
+    .sec-sub { color: #64748b; font-size: 0.95rem; max-width: 500px; line-height: 1.7; margin-bottom: 50px; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .about-text { color: #94a3b8; line-height: 1.8; font-size: 0.95rem; margin-bottom: 16px; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 30px; }
+    .stat-box {
+      background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 12px; padding: 20px; text-align: center;
+    }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: #6366f1; }
+    .stat-label { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+    .info-card {
+      background: #111; border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 16px; padding: 32px;
+    }
+    .info-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 20px; }
+    .info-icon { font-size: 1.2rem; margin-top: 2px; }
+    .info-key { font-size: 0.7rem; color: #6366f1; letter-spacing: 0.1em; text-transform: uppercase; }
+    .info-val { font-size: 0.9rem; color: #e2e8f0; margin-top: 2px; }
+
+    /* SKILLS */
+    #skills { background: #0d0d0d; max-width: 100%; padding: 100px 40px; }
+    #skills > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
+    .skill-card {
+      background: #111; border: 1px solid rgba(99,102,241,0.15);
+      border-radius: 14px; padding: 24px; transition: all 0.3s;
+    }
+    .skill-card:hover { border-color: #6366f1; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(99,102,241,0.15); }
+    .skill-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .skill-title { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .stag {
+      background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2);
+      color: #818cf8; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;
+    }
+
+    /* PROJECTS */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .proj-card {
+      background: #111; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px; padding: 28px; transition: all 0.3s;
+    }
+    .proj-card:hover { border-color: #6366f1; transform: translateY(-6px); box-shadow: 0 16px 40px rgba(99,102,241,0.15); }
+    .proj-icon { font-size: 2rem; margin-bottom: 16px; }
+    .proj-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .proj-desc { color: #64748b; font-size: 0.87rem; line-height: 1.7; margin-bottom: 18px; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ptag {
+      background: rgba(99,102,241,0.1); color: #818cf8;
+      padding: 3px 10px; border-radius: 4px; font-size: 0.72rem;
+    }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+    .contact-info-box {
+      background: #111; border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 16px; padding: 32px;
+    }
+    .c-row { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; }
+    .c-icon {
+      width: 44px; height: 44px; background: rgba(99,102,241,0.15);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .c-label { font-size: 0.7rem; color: #6366f1; text-transform: uppercase; letter-spacing: 0.1em; }
+    .c-val { font-size: 0.9rem; color: #e2e8f0; margin-top: 2px; }
+    .form-box { display: flex; flex-direction: column; gap: 16px; }
+    .form-box input, .form-box textarea {
+      background: #111; border: 1px solid rgba(99,102,241,0.2);
+      color: #fff; padding: 14px 16px; border-radius: 10px;
+      font-size: 0.9rem; outline: none; font-family: inherit; resize: none;
+      transition: border-color 0.2s;
+    }
+    .form-box input:focus, .form-box textarea:focus { border-color: #6366f1; }
+    .form-box textarea { min-height: 120px; }
+    .send-btn {
+      padding: 14px; background: #6366f1; color: #fff;
+      border: none; border-radius: 10px; font-size: 0.9rem;
+      font-weight: 600; cursor: pointer; transition: all 0.3s;
+    }
+    .send-btn:hover { background: #4f46e5; transform: translateY(-2px); }
+
+    footer {
+      text-align: center; padding: 40px 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: #334155; font-size: 0.85rem;
+    }
+    footer span { color: #6366f1; }
+
+    .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media(max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 70px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">S.</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div id="home">
+  <div class="badge">✨ Available for Internships & Projects</div>
+  <h1 class="hero-name">Hello, I'm <span>Sudharsan S</span></h1>
+  <p class="hero-sub">A passionate 2nd Year B.Tech student specializing in Artificial Intelligence & Data Science — building intelligent systems that solve real-world problems.</p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn1">View Projects</a>
+    <a href="#contact" class="btn2">Get in Touch</a>
+  </div>
+  <div class="tags">
+    <span class="tag">⚡ AI & ML</span>
+    <span class="tag">🔬 Data Science</span>
+    <span class="tag">🐍 Python</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-up">
+    <div>
+      <div class="sec-label">Who I Am</div>
+      <h2 class="sec-title">About Me</h2>
+      <p class="about-text">I'm <strong>Sudharsan S</strong>, a motivated and enthusiastic engineering student pursuing my B.Tech in Artificial Intelligence and Data Science at Asian College of Engineering and Technology, Coimbatore.</p>
+      <p class="about-text">I have a strong passion for building data-driven solutions, exploring machine learning algorithms, and developing AI applications that create meaningful impact.</p>
+      <p class="about-text">When I'm not coding, I'm exploring new research papers and sharpening my problem-solving skills.</p>
+      <div class="stats">
+        <div class="stat-box"><div class="stat-num">2nd</div><div class="stat-label">Year B.Tech</div></div>
+        <div class="stat-box"><div class="stat-num">AI</div><div class="stat-label">Specialization</div></div>
+        <div class="stat-box"><div class="stat-num">DS</div><div class="stat-label">Data Science</div></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-row"><div class="info-icon">🎓</div><div><div class="info-key">Degree</div><div class="info-val">B.Tech – AI & Data Science</div></div></div>
+      <div class="info-row"><div class="info-icon">🏫</div><div><div class="info-key">College</div><div class="info-val">Asian College of Engineering and Technology</div></div></div>
+      <div class="info-row"><div class="info-icon">📍</div><div><div class="info-key">Location</div><div class="info-val">Coimbatore – 641 110, Tamil Nadu</div></div></div>
+      <div class="info-row"><div class="info-icon">📅</div><div><div class="info-key">Batch</div><div class="info-val">2nd Year (2024 – 2028)</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div id="skills">
+  <div style="text-align:center; margin-bottom:50px;" class="fade-up">
+    <div class="sec-label">What I Know</div>
+    <h2 class="sec-title">Skills & Technologies</h2>
+    <p class="sec-sub" style="margin:0 auto;">A growing toolkit of AI, data, and development technologies I'm actively learning and applying.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-title">AI & Machine Learning</div>
+      <div class="skill-tags">
+        <span class="stag">Machine Learning</span><span class="stag">Deep Learning</span>
+        <span class="stag">NLP</span><span class="stag">Scikit-learn</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">📊</div>
+      <div class="skill-title">Data Science</div>
+      <div class="skill-tags">
+        <span class="stag">NumPy</span><span class="stag">Pandas</span>
+        <span class="stag">Matplotlib</span><span class="stag">Seaborn</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">💻</div>
+      <div class="skill-title">Programming</div>
+      <div class="skill-tags">
+        <span class="stag">Python</span><span class="stag">C</span>
+        <span class="stag">SQL</span><span class="stag">HTML/CSS</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🛠️</div>
+      <div class="skill-title">Tools</div>
+      <div class="skill-tags">
+        <span class="stag">Git</span><span class="stag">GitHub</span>
+        <span class="stag">VS Code</span><span class="stag">Jupyter</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div style="text-align:center; margin-bottom:50px;" class="fade-up">
+    <div class="sec-label">What I've Built</div>
+    <h2 class="sec-title">Projects</h2>
+    <p class="sec-sub" style="margin:0 auto;">A collection of AI and data science projects from my academic journey.</p>
+  </div>
+  <div class="proj-grid">
+    <div class="proj-card fade-up">
+      <div class="proj-icon">🧠</div>
+      <div class="proj-title">Student Performance Predictor</div>
+      <p class="proj-desc">A machine learning model that predicts student academic performance based on study habits, attendance, and previous scores.</p>
+      <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Scikit-learn</span><span class="ptag">Pandas</span></div>
+    </div>
+    <div class="proj-card fade-up">
+      <div class="proj-icon">📈</div>
+      <div class="proj-title">Data Visualization Dashboard</div>
+      <p class="proj-desc">An interactive dashboard built to visualize complex datasets with dynamic charts and filters for real-time exploration.</p>
+      <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Matplotlib</span><span class="ptag">Seaborn</span></div>
+    </div>
+    <div class="proj-card fade-up">
+      <div class="proj-icon">🌐</div>
+      <div class="proj-title">AI Portfolio Website</div>
+      <p class="proj-desc">This portfolio — designed and coded from scratch with animations and a modern dark theme using pure HTML, CSS & JS.</p>
+      <div class="proj-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="text-align:center; margin-bottom:50px;" class="fade-up">
+    <div class="sec-label">Let's Connect</div>
+    <h2 class="sec-title">Get In Touch</h2>
+    <p class="sec-sub" style="margin:0 auto;">I'm open to internship opportunities, collaborations, and exciting projects. Feel free to reach out!</p>
+  </div>
+  <div class="contact-grid fade-up">
+    <div class="contact-info-box">
+      <div class="c-row"><div class="c-icon">🧑</div><div><div class="c-label">Full Name</div><div class="c-val">Sudharsan S</div></div></div>
+      <div class="c-row"><div class="c-icon">🏫</div><div><div class="c-label">College</div><div class="c-val">Asian College of Engineering and Technology</div></div></div>
+      <div class="c-row"><div class="c-icon">📍</div><div><div class="c-label">Location</div><div class="c-val">Coimbatore – 641 110, Tamil Nadu</div></div></div>
+      <div class="c-row"><div class="c-icon">🎓</div><div><div class="c-label">Department</div><div class="c-val">B.Tech – AI & Data Science</div></div></div>
+      <div class="c-row"><div class="c-icon">📧</div><div><div class="c-label">Email</div><div class="c-val">udharsan2592006@gmail.com</div></div></div>
+    </div>
+    <div class="form-box">
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Your Email" />
+      <textarea placeholder="Your Message..."></textarea>
+      <button class="send-btn" onclick="alert('Message sent! Thank you 🙏')">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed & Built by <span>Sudharsan S</span> · B.Tech AI & Data Science · ACET Coimbatore
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
